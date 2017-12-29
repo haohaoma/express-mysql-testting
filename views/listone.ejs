@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <style>
+        table{
+            border-left: solid 1px #ccc;
+            border-top: solid 1px #ccc;
+        }
+        th,td{
+            border-right: solid 1px #ccc;
+            border-bottom: solid 1px #ccc;   
+            padding: 5px 15px;
+        }
+        tbody tr:nth-child(odd){
+            background: #f2f2f2;
+        }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/api/update" method="post">
+        <% list.forEach(function(user) { %>
+            <% for(var i in user){ %>
+                <% if(i !=='id'){ %>
+                    <% if(i !=='date'){ %>
+                        <div>
+                            <input type="text" name="<%- i %>" value="<%- user[i] %>">
+                        </div>
+                    <% } else { %>
+                        <div>
+                            <input type="text" name="<%- i %>" value="<%- new Date(user[i]).getFullYear() + '-' + (new Date(user[i]).getMonth() + 1) + '-' + new Date(user[i]).getDate() %>">
+                        </div>
+                    <%}%> 
+                <%} else {%>
+                <input type="hidden" name="uid" value="<%- user[i] %>">
+                <% } %>
+            <%};%>
+        <%});%>
+        <button type="submit">提交</button>
+    </form>
+  </body>
+</html>

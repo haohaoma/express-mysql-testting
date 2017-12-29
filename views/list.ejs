@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <style>
+        table{
+            border-left: solid 1px #ccc;
+            border-top: solid 1px #ccc;
+        }
+        th,td{
+            border-right: solid 1px #ccc;
+            border-bottom: solid 1px #ccc;   
+            padding: 5px 15px;
+        }
+        tbody tr:nth-child(odd){
+            background: #f2f2f2;
+        }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <table width="666" cellpadding="0" cellspacing="0">
+    	<thead>
+    		<tr>
+    			<th>name</th>
+    			<th>pwd</th>
+    			<th>age</th>
+    			<th>date</th>
+                <th>操作</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<% list.forEach(function(user){ %>
+    			<tr>
+				    <td><%- user.name %></td>
+			    	<td><%- user.password %></td>
+			    	<td><%- user.age %></td>
+			    	<td><%- new Date(user.date).getFullYear() + '-' + (new Date(user.date).getMonth() + 1) + '-' + new Date(user.date).getDate() %></td>
+                    <td align="center">
+                        <a href="/api/select/<%- user.id %>">查看</a>
+                    </td>
+    			</tr>
+    		<% }); %>
+    	</tbody>
+    </table>
+  </body>
+</html>
